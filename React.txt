@@ -1,0 +1,109 @@
+    
+
+             REACT - Notes :(Front-end Technology)
+
+        ---------------------------
+
+        1.to create react app : npx create-react-app project-name
+
+
+
+        concepts & Features
+         ------------------------------
+          
+
+          1. JS library for building UI
+          2. single page application
+          3. Declarative :  
+          4. Immutability : not changing
+          5. Pure functions : it doesnot cause any side effects
+          6. virtual DOM - it will take a copy of real DOM and changed Dom, and compare if there is any change and act likes it
+          7. Unidirectional data flow : parent to child 
+          8. JSX (javascriprt XML)
+          9. Transpiling (Converting JSX to js,html) - bebel
+          10. to create react app : create-react-app command 
+          11. Based on components - is small part of UI,every react app consist of tree components : Parent/Starting component : App component
+            -its a js/jsx file with filename starts with capital letter
+            -diffferent types of componenet
+                -functional component - components created using function - recf
+                -class components - componenets created using class - rcc
+          12. JSX - javascript XML
+            -every tag should contain inside a perent tag
+            -every tag should has closing tag
+            -empty fragment : <> </>
+            -class becomes className 
+            - for becomes htmlFor
+            - use {js-expression} to provide js expression inside JSX  
+            - to style jsx elements using class
+              -should be camel case
+                 -Inline CSS
+                 -External CSS
+                -
+          13.Props : property of a component can be shared with child components 
+                  - it is an object
+                  - to acess shared data in child components using props whcich will be argument of the component   
+
+          14.Component Styling using CSS
+             - inline CSS 
+             - CSS style sheet
+             - CSS Module
+          15.React Events    
+             -without arguments call  function with its name only while bending event
+             -with arguments : bind the event with arrow function and call the function inside the event
+             -with event as argument : use event object as argument of arrow function
+
+          16. Conditional Rendering   
+             - if statement : operator &&
+             - if-else statement :ternary operator ?
+
+
+          17.  React State - its object for class componenet
+              - store component property
+              - when state changes component re-render(refresh)
+              - to change state value ,use setState()
+          18. React Component Lifecycle
+              -Mounting : putting elements into DOM
+                  -constructor()
+                  -getDerivedStateFromProps()
+                  -render()
+                  -componenetDidMount()
+              -Updating 
+              -Unmounting
+
+          19.React Hooks : To use react features such as state and lifecycle in react functional componenet
+            -import hooks and call them inside functional component
+            -Hooks can only called at the top level of a component
+            -Hook cannot be conditional
+            -Types of Hooks
+              -Predefined Hooks 
+                            -useState() : used to track state in functional component 
+              -Custom Hook 
+
+         20. Difereance between functional and class based Hooks    
+
+                   Functional Based Component                           Class Based Component
+           ============================================= ================================================         
+       1.js pure functionn acccept props and                  1.class requires to extend from React Component
+         return JSX (react elements)                              render function return JSX
+
+       2. no need  of  render function                          2.Must use render function to return JSX
+      
+       3.    Run from top to bottam, once jsx return           3. componenetkeep alive depending on different life cycle phases
+               then it cannot be alive
+       
+       4. Stateless componenet                                 4.Stateful component
+
+       5.Hooks used, counstructor not used                       5.not using hooks,use constructor to initiallize state 
+
+
+
+       21.Rendering list (Array of lists) : using map method
+
+       22. React form 
+                - handele by react componenet
+                - preventDefault()- method cancel the event if it is cancelable (it will not refresh)
+
+      23,API call in react Using AXIOS : ppromise based API call     
+
+      24.Routing - set up path for component in react     
+              -use react-router-path
