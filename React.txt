@@ -106,4 +106,4 @@
       23,API call in react Using AXIOS : ppromise based API call     
 
       24.Routing - set up path for component in react     
-              -use react-router-path
+              -use react-router-dom library path
