@@ -107,3 +107,6 @@
 
       24.Routing - set up path for component in react     
               -use react-router-dom library path
+
+
+      25. statelifting -  sharing datas between siblings          

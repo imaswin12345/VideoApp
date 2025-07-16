@@ -1,7 +1,14 @@
 import React from 'react'
 import { Row, Col, Card } from 'react-bootstrap'
+import Button from '../pages/Button.css'
+import { useNavigate } from 'react-router'
+import { Link } from 'react-router'
 
 function LandingPage() {
+  const navigateByUrl = useNavigate()
+  const navigate = ()=>{
+    navigateByUrl('/home')
+  }
   return (
     <>
       <Row style={{ marginLeft: '50px' }} className='mt-5 me-5'>
@@ -10,7 +17,8 @@ function LandingPage() {
           <p style={{ textAlign: 'justify' }}>
             Our React Media Player is a lightweight, modern application designed for seamless audio and video playback. Built with React's powerful component-based structure, it allows users to stream and control media with ease. Whether it's music, movies, or podcasts, the player provides a fluid and responsive experience.
           </p>
-          <button style={{ marginLeft: '10px' }} type="button" className="btn btn-outline-info mt-3 me-4">Get Started</button>
+          <button onClick={navigate} style={{ marginLeft: '10px' }} type="button" className= " shiny-text btn btn-outline-info mt-3 me-4">Get Started</button>
+          
         </Col>
 
         <Col md={6} style={{ marginLeft: '50px' }}>
@@ -24,13 +32,13 @@ function LandingPage() {
       </Row>
 
       <div className='container mt-5 mb-5 d-flex justify-content-center align-items-center flex-column'>
-        <h4 style={{ textAlign: 'center' }}>Features</h4>
+        <h4 className='Fetu' style={{ textAlign: 'center' }}>Features</h4>
 
         <Row className='mt-4 g-5'>
 
           <Col md={4} className='d-flex justify-content-center mb-4'>
             <Card style={{ width: '18rem' }}>
-              <Card.Img variant="top" src="https://media.tenor.com/mxYtswglHpsAAAAM/stars-gif.gif" />
+              <Card.Img variant="top" src="https://media.tenor.com/Ob7Y0A4KFyQAAAA1/setting-icon.webp" />
               <Card.Body>
                 <Card.Title>Managing Videos</Card.Title>
                 <Card.Text>
@@ -42,7 +50,7 @@ function LandingPage() {
 
           <Col md={4} className='d-flex justify-content-center mb-4'>
             <Card style={{ width: '18rem' }}>
-              <Card.Img variant="top" src="https://media.tenor.com/mxYtswglHpsAAAAM/stars-gif.gif" />
+              <Card.Img variant="top" src="https://media.istockphoto.com/id/1178909529/vector/line-icons-editable-stroke-pixel-perfect-for-mobile-and-web-contains-such-icons-as.jpg?s=612x612&w=0&k=20&c=pXI532lzP7XPsGdOm2d6tiUI2WTtuOVhU1JwfVRnZmQ=" />
               <Card.Body>
                 <Card.Title>Catogorise Videos</Card.Title>
                 <Card.Text>
@@ -82,15 +90,7 @@ function LandingPage() {
   </div>
 
   <div className='video w-100 d-flex justify-content-center'>
-    <iframe
-      width="100%"
-      height="315"
-      src="https://www.youtube.com/embed/JfP7zfeQrG4"
-      title="YouTube video player"
-      frameBorder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowFullScreen
-    ></iframe>
+    <iframe width={"100%"} height="400px" src="https://www.youtube.com/embed/X7hdUmMJmoQ" title="One of The Greatest 0 G/A Performance You&#39;ll Ever See" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
   </div>
 </div>
     </>

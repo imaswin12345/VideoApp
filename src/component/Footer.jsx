@@ -28,7 +28,7 @@ function Footer() {
 
         <div>
           <h4>Contact Us</h4>
-          <input type="email" placeholder='Enter Your Emial' />
+          <input type="email" placeholder='Enter your email' />
              <Button variant="dark">Submit</Button>
 
             <div className="d-flex flex-row mt-3">
