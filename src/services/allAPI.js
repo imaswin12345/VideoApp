@@ -36,4 +36,46 @@ export const deleteAVideo = async (id) => {
 export const addHistory = async (videoHistory)=>{
 
   return await commanAPI ("POST",`${serverURL}/history`,videoHistory )
+
+
 }
+
+// get all watch history
+export const getHistory = async () => {
+  return await commanAPI("GET", `${serverURL}/history`, "")
+}
+
+// add category to json server
+
+export const  saveCategory = async (body)=> {
+  return await commanAPI("POST",`${serverURL}/categories`,body)
+}
+
+//   get category from json server
+ 
+export const  getAllCategory = async ()=> {
+  return await commanAPI("GET",`${serverURL}/categories`,"")
+
+
+}
+
+// delete catogary
+
+export const  deleteategory = async (id)=> {
+  return await commanAPI("DELETE",`${serverURL}/categories/${id}`,{})
+
+
+}
+
+
+
+
+
+
+
+// if it GET no Body needed
+// if its POST body needed
+
+
+
+

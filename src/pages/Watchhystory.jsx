@@ -1,7 +1,29 @@
-import React from 'react'
-import { Link } from 'react-router'
+import React, { useEffect, useState } from 'react'
+import { data, Link } from 'react-router'
+import {getHistory} from '../services/allAPI'
 
 function Watchhystory() {
+
+
+  const [history,setHistory] = useState([])
+
+  const getWatchHistory = async ()=>{
+
+    const {data} = await getHistory()
+
+    setHistory(data);
+
+    
+  }
+
+
+  useEffect(()=>{
+    getWatchHistory()
+  },[])
+
+  console.log(history);
+  
+
   return (
     <>
 
@@ -19,10 +41,20 @@ function Watchhystory() {
       </thead>
     
     <tbody style={{color:'red'}}>
-      <td>1</td>
-      <td>Elclassico</td>
-      <td><a href="https://youtu.be/AfpItQBKl04">https://youtu.be/AfpItQBKl04</a></td>
-      <td>24/12/2025</td>
+      {
+        history?.length>0?
+        history.map((item,index)=>(
+          <tr>
+           <td>{index+1}</td>
+      <td>{item?.caption}</td>
+      <td><a href={item?.embedlink}>{item?.embedlink}</a></td>
+      <td>{item?.timestamp}</td>
+        </tr>
+
+        ))
+        : <p>Nothing To display</p>
+     
+}
       
     </tbody>
     </table>

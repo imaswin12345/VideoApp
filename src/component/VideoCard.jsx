@@ -3,7 +3,7 @@ import { Card } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import { useState } from 'react';
 import { Modal } from 'react-bootstrap';
-import { deleteAVideo } from '../services/allAPI';
+import { addHistory, deleteAVideo } from '../services/allAPI';
 import { toast } from 'react-toastify';
 
 function VideoCard({displayData,setDeleteVideoStatus}) {
@@ -11,10 +11,9 @@ function VideoCard({displayData,setDeleteVideoStatus}) {
  ;
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  
 
-  const handleClosee = () => setShow(false);
-  const handleShoww = () => setShow(true);
+ 
   
 
   const handleDelete = async (id)=>{
@@ -29,6 +28,24 @@ function VideoCard({displayData,setDeleteVideoStatus}) {
       toast.error(`Unable to Delete ${displayData.caption} Video`)
     }
     
+  }
+
+  const handleShow =async () =>{ setShow(true);
+const {caption,embedlink}= displayData
+// genarate time data
+
+let today = new Date()
+
+const timestamp = new  Intl.DateTimeFormat("en-US",{year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",second:"2-digit"}).format(today);
+  
+// watch video to add json server
+
+let reqBody ={
+  caption,embedlink,timestamp
+}
+
+await addHistory(reqBody)
+
   }
 
   
