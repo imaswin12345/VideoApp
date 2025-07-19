@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { data, Link } from 'react-router'
-import {getHistory} from '../services/allAPI'
+import {getHistory,deleteHistory} from '../services/allAPI'
+import { Bounce, ToastContainer,toast } from 'react-toastify';
 
 function Watchhystory() {
 
@@ -16,6 +17,19 @@ function Watchhystory() {
     
   }
 
+  // delete watch hystory
+
+  const handleDeleteHystory = async (id)=>{
+    
+    const response = await deleteHistory(id)
+
+    if(response.status==200){
+    toast.success("History item deleted successfully!")
+    getWatchHistory()
+  }else{
+    toast.error("Failed to delete history item")
+  }
+}
 
   useEffect(()=>{
     getWatchHistory()
@@ -49,6 +63,9 @@ function Watchhystory() {
       <td>{item?.caption}</td>
       <td><a href={item?.embedlink}>{item?.embedlink}</a></td>
       <td>{item?.timestamp}</td>
+      <button onClick={()=>handleDeleteHystory(item.id)} style={{ background: 'none', border: 'none' }}><td><i className="fa-solid fa-trash"></i></td></button>
+      
+      
         </tr>
 
         ))
@@ -58,6 +75,13 @@ function Watchhystory() {
       
     </tbody>
     </table>
+
+      <ToastContainer
+           position='top-center'
+           theme='colored'
+           autoClose={2000}
+           transition={Bounce}
+           />
 
 
 

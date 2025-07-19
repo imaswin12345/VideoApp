@@ -61,14 +61,24 @@ export const  getAllCategory = async ()=> {
 
 // delete catogary
 
-export const  deleteategory = async (id)=> {
+export const  deleteCategory = async (id)=> {
   return await commanAPI("DELETE",`${serverURL}/categories/${id}`,{})
 
 
 }
 
+// update Category form json server
+
+export const updateCategory = async (id,body)=>{
+
+  return await commanAPI("PUT",`${serverURL}/categories/${id}`,body)
+}
 
 
+// delete WatchHistory 
+ export const deleteHistory = async (id) => {
+  return await commanAPI("DELETE", `${serverURL}/history/${id}`, {})
+}
 
 
 

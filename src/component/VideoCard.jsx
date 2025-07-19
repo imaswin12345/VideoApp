@@ -47,7 +47,11 @@ let reqBody ={
 await addHistory(reqBody)
 
   }
-
+ const dragStarted = (e,id)=>{
+  console.log("Drag started");
+  e.dataTransfer.setData("cardId",id)
+  
+ }
   
 
   
@@ -56,7 +60,7 @@ await addHistory(reqBody)
     <>
     {
       displayData &&
-    <Card style={{ width: '18rem' }}>
+    <Card style={{ width: '18rem' }} draggable onDragStart={(e)=>dragStarted(e,displayData?.id)}>
       <Card.Img onClick={handleShow} style={{height:"170px"}} variant="top" src={displayData?.url} />
       <Card.Body>
         <Card.Title className='d-flex justify-content-between align-items-center'>
