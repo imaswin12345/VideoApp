@@ -1,28 +1,30 @@
 import React from 'react'
-import { Navbar,Container } from 'react-bootstrap'
+import { Navbar, Container, Nav } from 'react-bootstrap'
 import { Link } from 'react-router'
-
 
 function Header() {
   return (
-  <Navbar className="bg-body-tertiary">
-        <Container>
-          <Navbar.Brand>
-            <Link to={'/'} style={{color:'black',textDecoration:'none'}}>
-            <i className="fa-solid fa-forward"></i>{' '}
+    <Navbar bg="light" expand="lg" className="shadow-sm">
+      <Container>
+        <Navbar.Brand as={Link} to="/" className="text-dark text-decoration-none">
+          <i className="fa-solid fa-forward me-2"></i>
           VEDDIO
-           </Link>
-           <Link style={{textDecoration:'none',color:'black',fontSize:14}} to="/home">
-           <a style={{marginLeft:'900px'}}>HOME</a>
-           </Link>
-           
-            <Link style={{textDecoration:'none',color:'black',fontSize:14}} to="/">
-           <a style={{marginLeft:'25px'}}>Get Started</a>
-           </Link>
-           
-          </Navbar.Brand>
-        </Container>
-      </Navbar>
+        </Navbar.Brand>
+        
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="ms-auto">
+            <Nav.Link as={Link} to="/home" className="text-dark px-3">
+              Home
+            </Nav.Link>
+            <Nav.Link as={Link} to="/" className="text-dark px-3">
+              Get Started
+            </Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   )
 }
 
