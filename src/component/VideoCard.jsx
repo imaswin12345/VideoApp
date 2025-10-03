@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 
 function VideoCard({displayData,setDeleteVideoStatus}) {
   const [show, setShow] = useState(false);
- ;
+  const [hovered, setHovered] = useState(false);
 
   const handleClose = () => setShow(false);
   
@@ -54,37 +54,125 @@ await addHistory(reqBody)
  }
   
 
-  
-  
+  const styles = {
+    card: {
+      width: '18rem',
+      backgroundColor: '#1a1f3a',
+      border: '1px solid rgba(59, 130, 246, 0.2)',
+      borderRadius: '16px',
+      overflow: 'hidden',
+      transition: 'all 0.3s ease',
+      display: 'flex',
+      flexDirection: 'column',
+      color: '#ffffff',
+      ...(hovered && {
+        transform: 'translateY(-8px)',
+        borderColor: 'rgba(59, 130, 246, 0.5)',
+        boxShadow: '0 20px 40px rgba(59, 130, 246, 0.2)'
+      })
+    },
+    cardImg: {
+      height: '170px',
+      objectFit: 'cover',
+      cursor: 'pointer',
+      backgroundColor: '#0f1629'
+    },
+    cardBody: {
+      padding: '1.5rem',
+      flex: 1,
+      display: 'flex',
+      flexDirection: 'column'
+    },
+    cardTitle: {
+      fontSize: '1.125rem',
+      fontWeight: '600',
+      color: '#ffffff',
+      marginBottom: '0.75rem',
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center'
+    },
+    captionText: {
+      fontSize: '15px',
+      textAlign: 'center',
+      color: '#ffffffff',
+      margin: 0,
+      flex: 1
+    },
+    deleteButton: {
+      background: 'none',
+      border: 'none',
+      color: '#ef4444',
+      cursor: 'pointer',
+      fontSize: '1.2rem',
+      padding: '0.5rem',
+      borderRadius: '4px',
+      transition: 'all 0.2s ease',
+      '&:hover': {
+        backgroundColor: 'rgba(239, 68, 68, 0.1)',
+        color: '#dc2626'
+      }
+    },
+    modalContent: {
+      backgroundColor: '#0a0e27',
+      color: '#ffffff',
+      border: '1px solid rgba(59, 130, 246, 0.2)',
+      borderRadius: '12px'
+    },
+    modalHeader: {
+      backgroundColor: '#1a1f3a',
+      borderBottom: '1px solid rgba(59, 130, 246, 0.2)',
+      borderTopLeftRadius: '12px',
+      borderTopRightRadius: '12px'
+    },
+    modalTitle: {
+      color: '#ffffff',
+      fontWeight: '600'
+    },
+    modalBody: {
+      backgroundColor: '#0a0e27',
+      padding: '1.5rem'
+    },
+    iframe: {
+      borderRadius: '8px',
+      boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3)'
+    }
+  }
+
   return (
     <>
     {
       displayData &&
-    <Card style={{ width: '18rem' }} draggable onDragStart={(e)=>dragStarted(e,displayData?.id)}>
-      <Card.Img onClick={handleShow} style={{height:"170px"}} variant="top" src={displayData?.url} />
-      <Card.Body>
-        <Card.Title className='d-flex justify-content-between align-items-center'>
-          <Card.Text style={{fontSize:'15px',textAlign:"center"}}>
-        {displayData?.caption}
-        </Card.Text>
-           <button onClick={()=>handleDelete(displayData?.id)} style={{ background: 'none', border: 'none' }}>
-  <i className="fa-solid fa-trash text-danger mb-4"></i>
-</button>
+    <Card style={styles.card} draggable onDragStart={(e)=>dragStarted(e,displayData?.id)} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
+      <Card.Img onClick={handleShow} style={styles.cardImg} variant="top" src={displayData?.url} />
+      <Card.Body style={styles.cardBody}>
+        <Card.Title style={styles.cardTitle}>
+          <p style={styles.captionText}>
+            {displayData?.caption}
+          </p>
+           <button onClick={()=>handleDelete(displayData?.id)} style={styles.deleteButton}>
+             <i className="fa-solid fa-trash"></i>
+           </button>
         </Card.Title>
-         <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>{displayData?.caption}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <iframe width={"100%"} height="400px" src={`${displayData?.embedlink}?autoplay=1`} title="PSG STUNS Real Madrid 4-0  | FIFA Club World Cup Highlights" frameborder="0"  allowfullscreen></iframe>
-        </Modal.Body>
-      </Modal>
+         <Modal show={show} onHide={handleClose} contentClassName="custom-modal">
+           <Modal.Header style={styles.modalHeader} closeButton>
+             <Modal.Title style={styles.modalTitle}>{displayData?.caption}</Modal.Title>
+           </Modal.Header>
+           <Modal.Body style={styles.modalBody}>
+             <iframe 
+               style={styles.iframe}
+               width={"100%"} 
+               height="400px" 
+               src={`${displayData?.embedlink}?autoplay=1`} 
+               title="PSG STUNS Real Madrid 4-0  | FIFA Club World Cup Highlights" 
+               frameBorder="0"  
+               allowFullScreen
+             ></iframe>
+           </Modal.Body>
+         </Modal>
       </Card.Body>
     </Card>
     }
-
-
-
     </>
     
   )

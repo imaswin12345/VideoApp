@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Modal, Button, Form, Col, Row } from 'react-bootstrap';
+import { Modal, Button, Form } from 'react-bootstrap';
 import { ToastContainer, toast, Bounce } from 'react-toastify';
 import { saveCategory, getAllCategory, deleteCategory, updateCategory } from '../services/allAPI';
 import 'react-toastify/dist/ReactToastify.css';
-import { data } from 'react-router';
 import VideoCard from './VideoCard';
 
 function Category() {
@@ -58,76 +57,180 @@ function Category() {
     console.log("Inside Category ID: " + categoryId);
     console.log("Video Card ID: " + videoCardId);
 
-    const selectedCategory = allCategory.find(item=>item.id===categoryId)
-    selectedCategory.allVideos.push(data)
-    await updateCategory(categoryId,selectedCategory)
+    const selectedCategory = allCategory.find(item => item.id === categoryId)
+    selectedCategory.allVideos.push(videoCardId)
+    await updateCategory(categoryId, selectedCategory)
     handleGetCategory()
   };
 
-  return (
-    <div className="container-fluid p-3">
-      <div className="d-flex justify-content-between align-items-center mb-3">
-        <h4 className="mb-0">Categories</h4>
-        <button onClick={handleShow} className='btn btn-info btn-sm'>
-          <i className="fa-solid fa-plus me-2"></i>New Category
-        </button>
-      </div>
+  const styles = {
+    container: {
+      padding: '20px',
+      backgroundColor: '#1a1f3a',
+      borderRadius: '8px',
+      border: '1px solid #3b82f6'
+    },
+    header: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      marginBottom: '20px'
+    },
+    title: {
+      margin: 0,
+      fontSize: '1.25rem',
+      fontWeight: '600',
+      color: '#ffffff'
+    },
+    newCategoryButton: {
+      backgroundColor: '#3b82f6',
+      border: 'none',
+      padding: '8px 16px',
+      borderRadius: '6px',
+      color: '#ffffff',
+      cursor: 'pointer',
+      fontSize: '14px',
+      fontWeight: '500'
+    },
+    categoryGrid: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+      gap: '16px'
+    },
+    categoryCard: {
+      border: '1px solid #3b82f6',
+      padding: '16px',
+      borderRadius: '8px',
+      backgroundColor: '#0a0e27'
+    },
+    categoryHeader: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      marginBottom: '8px'
+    },
+    categoryName: {
+      margin: 0,
+      fontSize: '1rem',
+      fontWeight: '600',
+      color: '#ffffff'
+    },
+    deleteButton: {
+      backgroundColor: 'transparent',
+      border: '1px solid #ef4444',
+      color: '#ef4444',
+      padding: '4px 8px',
+      borderRadius: '4px',
+      cursor: 'pointer',
+      fontSize: '14px'
+    },
+    videoCount: {
+      fontSize: '12px',
+      color: '#9ca3af'
+    },
+    noCategories: {
+      textAlign: 'center',
+      padding: '40px 0',
+      color: '#9ca3af',
+      fontWeight: '600'
+    }
+  }
 
-      <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
-        {allCategory && allCategory.length > 0 ? 
-          allCategory.map(item => (
-            <div key={item.id} className="col">
+  return (
+    <>
+      <div style={styles.container}>
+        <div style={styles.header}>
+          <h4 style={styles.title}>Categories</h4>
+          <button onClick={handleShow} style={styles.newCategoryButton}>
+            + New Category
+          </button>
+        </div>
+
+        <div style={styles.categoryGrid}>
+          {allCategory && allCategory.length > 0 ? 
+            allCategory.map(item => (
               <div
-                className='border p-3 rounded h-100'
+                key={item.id}
+                style={styles.categoryCard}
                 onDragOver={(e) => dragOver(e)}
                 onDrop={(e) => videoDropped(e, item.id)}
               >
-                <div className='d-flex justify-content-between align-items-center'>
-                  <h6 className="mb-0">{item.categoryName}</h6>
+                <div style={styles.categoryHeader}>
+                  <h6 style={styles.categoryName}>{item.categoryName}</h6>
                   <button 
                     onClick={() => handleDeleteCategory(item.id)} 
-                    className='btn btn-sm btn-outline-danger'
+                    style={styles.deleteButton}
                   >
                     <i className='fa-solid fa-trash'></i>
                   </button>
                 </div>
                 {item.allVideos?.length > 0 && (
-                  <div className="mt-2">
-                    <small className="text-muted">
-                      {item.allVideos.length} video{item.allVideos.length !== 1 ? 's' : ''}
-                    </small>
+                  <div style={styles.videoCount}>
+                    {item.allVideos.length} video{item.allVideos.length !== 1 ? 's' : ''}
                   </div>
                 )}
               </div>
-            </div>
-          )) : (
-            <div className="col-12">
-              <p className='fw-bolder text-center py-4'>No categories found</p>
-            </div>
-          )
-        }
+            )) : (
+              <div style={styles.noCategories}>
+                No categories found
+              </div>
+            )
+          }
+        </div>
       </div>
 
       <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
-        <Modal.Header closeButton>
-          <Modal.Title>Add New Category</Modal.Title>
+        <Modal.Header closeButton style={{
+          backgroundColor: '#0a0e27',
+          borderBottom: '1px solid #3b82f6',
+          color: '#ffffff'
+        }}>
+          <Modal.Title style={{ color: '#ffffff', fontSize: '1.25rem' }}>Add New Category</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          <Form className='border border-secondary p-3 rounded'>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Category Name</Form.Label>
+        <Modal.Body style={{
+          backgroundColor: '#0a0e27',
+          color: '#ffffff',
+          padding: '20px'
+        }}>
+          <Form>
+            <Form.Group className="mb-3">
               <Form.Control
                 type="text"
                 placeholder="Enter Category Name"
                 value={categoryName}
                 onChange={(e) => setCategoryName(e.target.value)}
+                style={{
+                  backgroundColor: '#1a1f3a',
+                  border: '1px solid #3b82f6',
+                  color: '#ffffff'
+                }}
               />
             </Form.Group>
           </Form>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>Close</Button>
-          <Button onClick={handleCategoryName} className='btn btn-info'>Add Category</Button>
+        <Modal.Footer style={{
+          backgroundColor: '#0a0e27',
+          borderTop: '1px solid #3b82f6'
+        }}>
+          <Button 
+            onClick={handleCategoryName}
+            style={{
+              backgroundColor: '#3b82f6',
+              border: 'none'
+            }}
+          >
+            Add Category
+          </Button>
+          <Button 
+            variant="secondary" 
+            onClick={handleClose}
+            style={{
+              backgroundColor: '#6b7280',
+              border: 'none'
+            }}
+          >
+            Close
+          </Button>
         </Modal.Footer>
       </Modal>
 
@@ -137,7 +240,7 @@ function Category() {
         autoClose={2000}
         transition={Bounce}
       />
-    </div>
+    </>
   )
 }
 
