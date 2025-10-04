@@ -1,0 +1,42 @@
+/* Button.css */
+.shiny-text, .Fetu {
+  color: #534b4ba4;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 40%,
+    rgba(255, 255, 255, 0.8) 50%,
+    rgba(255, 255, 255, 0) 60%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  display: inline-block;
+  animation: shine 5s linear infinite;
+}
+
+/* Combine duplicate keyframes */
+@keyframes shine {
+  0% {
+    background-position: 100%;
+  }
+  100% {
+    background-position: -100%;
+  }
+}
+
+.shiny-text.disabled {
+  animation: none;
+}
+
+/* Add responsive font sizes */
+@media (max-width: 768px) {
+  .shiny-text, .Fetu {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .shiny-text, .Fetu {
+    font-size: 0.8rem;
+  }
+}
